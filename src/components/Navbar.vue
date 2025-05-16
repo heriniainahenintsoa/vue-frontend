@@ -34,6 +34,10 @@ const authStore = useAuthStore();
       v-else
       class="flex items-center justify-center gap-4 border-2 border-transparent"
     >
+      <RouterLink class="navLink" :to="{ name: 'create' }">
+        New post
+      </RouterLink>
+
       <form @submit.prevent="authStore.logout">
         <button>Logout</button>
       </form>
