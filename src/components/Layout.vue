@@ -7,4 +7,3 @@ import Navbar from "./Navbar.vue";
     <slot />
   </div>
 </template>
-<style lang=""></style>

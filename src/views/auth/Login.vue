@@ -3,36 +3,20 @@ import Errors from "@/components/Errors.vue";
 import { useAuthStore } from "@/stores/auth";
 import { reactive } from "vue";
 const formData = reactive({
-  name: "",
   email: "",
   password: "",
-  password_confirmation: "",
 });
 const authStore = useAuthStore();
-const onSubmit = async () => {
-  await authStore.auth("register", formData);
+const onSubmit = () => {
+  authStore.auth("login", formData);
 };
 </script>
 <template>
-  <h1 class="pageTitle text-center">Register a new Account</h1>
+  <h1 class="pageTitle text-center">Login to your Account</h1>
   <form
     @submit.prevent="onSubmit"
     class="rounded-lg border-2 p-6 max-w-lg mx-auto mt-6 space-y-4"
   >
-    <div class="formGroup">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        :class="['formInput', { inputError: authStore.errors.name }]"
-        placeholder="Enter your name"
-        v-model="formData.name"
-      />
-      <div v-if="authStore.errors.name">
-        <Errors :errors="authStore.errors.name" />
-      </div>
-    </div>
     <div class="formGroup">
       <label for="email">Email</label>
       <input
@@ -61,17 +45,6 @@ const onSubmit = async () => {
         <Errors :errors="authStore.errors.password" />
       </div>
     </div>
-    <div class="formGroup">
-      <label for="password_confirmation">Confirm your password</label>
-      <input
-        type="password"
-        id="password_confirmation"
-        name="password_confirmation"
-        class="formInput"
-        placeholder="Confirm your password"
-        v-model="formData.password_confirmation"
-      />
-    </div>
-    <button class="formButton" type="submit">Register</button>
+    <button class="formButton" type="submit">Login</button>
   </form>
 </template>

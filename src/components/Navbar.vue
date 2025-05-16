@@ -2,7 +2,6 @@
 import { useAuthStore } from "@/stores/auth";
 import { RouterLink } from "vue-router";
 const authStore = useAuthStore();
-console.log(authStore.user);
 </script>
 
 <template>
@@ -25,11 +24,21 @@ console.log(authStore.user);
         </svg>
       </span>
     </RouterLink>
-    <div class="flex items-center justify-center gap-4">
-      <div v-if="authStore.user == null">
-        <RouterLink class="navLink" :to="{ name: 'register' }">
-          Register
-        </RouterLink>
+    <div v-if="!authStore.user" class="flex items-center justify-center gap-4">
+      <RouterLink class="navLink" :to="{ name: 'register' }">
+        Register
+      </RouterLink>
+      <RouterLink class="navLink" :to="{ name: 'login' }"> Login </RouterLink>
+    </div>
+    <div
+      v-else
+      class="flex items-center justify-center gap-4 border-2 border-transparent"
+    >
+      <form @submit.prevent="authStore.logout">
+        <button>Logout</button>
+      </form>
+      <div class="bg-neutral-50 text-neutral-950 py-1 rounded-lg px-2">
+        <p>Hello, {{ authStore.user.name }}</p>
       </div>
     </div>
   </div>
